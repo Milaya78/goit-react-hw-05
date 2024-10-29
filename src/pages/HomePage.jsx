@@ -12,7 +12,6 @@ const HomePage = () => {
       try {
         setIsLoading(true);
         const data = await getTrendings();
-        // CTRL + SHIFT + L
         console.log("data: ", data);
         setTrendings(data.results);
       } catch (err) {

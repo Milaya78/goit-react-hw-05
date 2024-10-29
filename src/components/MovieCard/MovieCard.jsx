@@ -1,10 +1,16 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const MovieCard = ({ item }) => {
+  const location = useLocation();
   const posterPath = item.poster_path;
   return (
     <div>
-      <Link to={`/movies/${item.id}`}>
+      <Link
+        state={{
+          from: location,
+        }}
+        to={`/movies/${item.id}`}
+      >
         <img
           src={`https://image.tmdb.org/t/p/w500${posterPath}`}
           alt={item.original_title}

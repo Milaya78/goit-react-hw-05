@@ -1,7 +1,7 @@
 import { lazy, Suspense } from "react";
 import { NavLink, Route, Routes } from "react-router-dom";
 import NotFoundPage from "../../pages/NotFoundPage";
-// import HomePage from "../../pages/HomePage";
+
 const HomePage = lazy(() => import("../../pages/HomePage"));
 const MoviesPage = lazy(() => import("../../pages/MoviesPage"));
 const MovieDetailsPage = lazy(() => import("../../pages/MovieDetailsPage"));
@@ -24,10 +24,6 @@ const App = () => {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/movies" element={<MoviesPage />} />
-            {/* /movies/123 */}
-            {/* /movies/111 */}
-            {/* /movies/939 */}
-            {/* /movies/3 */}
             <Route path="/movies/:movieId" element={<MovieDetailsPage />}>
               <Route path="cast" element={<MovieCastPage />} />
               <Route path="reviews" element={<MovieReviewsPage />} />
