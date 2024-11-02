@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { getTrendings } from "../services/api";
-import MovieCard from "../components/MovieCard/MovieCard";
+import MovieList from "../components/MovieList/MovieList";
 
 const HomePage = () => {
   const [trendings, setTrendings] = useState(null);
@@ -12,7 +12,6 @@ const HomePage = () => {
       try {
         setIsLoading(true);
         const data = await getTrendings();
-        console.log("data: ", data);
         setTrendings(data.results);
       } catch (err) {
         if (err instanceof Error) setError(err.message);
@@ -28,10 +27,7 @@ const HomePage = () => {
     <div>
       {isLoading && <p>Loading...</p>}
       {error !== null && <p>Oops, some error occured. {error}</p>}
-      {trendings !== null &&
-        trendings.map((item) => {
-          return <MovieCard key={item.id} item={item} />;
-        })}
+      {trendings !== null && <MovieList movies={trendings} />}
     </div>
   );
 };

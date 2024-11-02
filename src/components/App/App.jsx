@@ -1,6 +1,7 @@
 import { lazy, Suspense } from "react";
-import { NavLink, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import NotFoundPage from "../../pages/NotFoundPage";
+import Navigation from "../Navigation/Navigation";
 
 const HomePage = lazy(() => import("../../pages/HomePage"));
 const MoviesPage = lazy(() => import("../../pages/MoviesPage"));
@@ -15,10 +16,7 @@ const MovieReviewsPage = lazy(() =>
 const App = () => {
   return (
     <div>
-      <header>
-        <NavLink to="/">Home</NavLink>
-        <NavLink to="/movies">Movies</NavLink>
-      </header>
+      <Navigation />
       <main>
         <Suspense fallback={<div>Loading page...</div>}>
           <Routes>

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { getMovieDetails } from "../services/api";
 import {
   Link,
@@ -20,7 +20,6 @@ const MovieDetailsPage = () => {
       try {
         setIsLoading(true);
         const data = await getMovieDetails(movieId);
-        console.log("data: ", data);
         setMovieDetails(data);
       } catch (err) {
         if (err instanceof Error) setError(err.message);
@@ -32,15 +31,14 @@ const MovieDetailsPage = () => {
     fetchMovieDetails();
   }, [movieId]);
 
-  const backLinkHref = location.state?.from ?? "/";
-
+  const backLinkHref = useRef(location.state?.from ?? "/");
   return (
     <div>
       {isLoading && <p>Loading...</p>}
       {error !== null && <p>Oops, some error occured. {error}</p>}
       {movieDetails !== null && (
         <div>
-          <Link to={backLinkHref}>Go back</Link>
+          <Link to={backLinkHref.current}>Go back</Link>
           {movieDetails.adult && (
             <p>
               <strong>This film is for 18+ only</strong>

@@ -13,9 +13,7 @@ const MovieReviews = () => {
       try {
         setIsLoading(true);
         const data = await getMovieReviews(movieId);
-        console.log("data: ", data);
         setReviews(data.results);
-        // setCast(data.cast);
       } catch (err) {
         if (err instanceof Error) setError(err.message);
       } finally {

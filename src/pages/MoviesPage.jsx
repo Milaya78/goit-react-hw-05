@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { getSearchedMovies } from "../services/api";
-import MovieCard from "../components/MovieCard/MovieCard";
 import { useSearchParams } from "react-router-dom";
+import MovieList from "../components/MovieList/MovieList";
 
 const MoviesPage = () => {
   const [movies, setMovies] = useState(null);
@@ -18,7 +18,7 @@ const MoviesPage = () => {
         setIsLoading(true);
         const data = await getSearchedMovies(query);
         // CTRL + SHIFT + L
-        console.log("data: ", data);
+        // console.log("data: ", data);
         setMovies(data.results);
       } catch (err) {
         if (err instanceof Error) setError(err.message);
@@ -53,10 +53,7 @@ const MoviesPage = () => {
       </form>
       {isLoading && <p>Loading...</p>}
       {error !== null && <p>Oops, some error occured. {error}</p>}
-      {movies !== null &&
-        movies.map((item) => {
-          return <MovieCard key={item.id} item={item} />;
-        })}
+      {movies !== null && <MovieList movies={movies} />}
     </div>
   );
 };
